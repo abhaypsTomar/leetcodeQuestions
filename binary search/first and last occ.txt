@@ -1,0 +1,50 @@
+class Solution {
+public:
+    vector<int> searchRange(vector<int>& nums, int target) {
+        int first = firstOcc(nums,target);
+        int last = lastOcc(nums,target);
+        vector<int>ans;
+        ans.push_back(first);
+        ans.push_back(last);
+        return ans;
+    }
+    int firstOcc(vector<int>& nums, int target){
+        int start =0;
+        int end=nums.size()-1;
+        int ans=-1;
+        while(start<=end){
+            int mid = start+(end-start)/2;
+            if(nums[mid]==target){
+                end=mid-1;
+                ans=mid;
+            }
+            else if(target>nums[mid]){
+                start =mid+1;
+            }
+            else{
+                end=mid-1;
+            }
+        }
+        return ans;
+    }
+    int lastOcc(vector<int>& nums, int target){
+        int start =0;
+        int end=nums.size()-1;
+        int ans=-1;
+        while(start<=end){
+            int mid = start+(end-start)/2;
+            if(nums[mid]==target){
+                start=mid+1;
+                ans=mid;
+            }
+            else if(target>nums[mid]){
+                start =mid+1;
+            }
+            else{
+                end=mid-1;
+            }
+        }
+        return ans;
+    }
+
+};
